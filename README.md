@@ -21,11 +21,25 @@ Go to "solver_build.py", use the proper configuration name **cfg_fname** and run
 ```
 python solver_build.py
 ```
-After this, a new directory *mpc_solver* will appear and contain the solver. Then, you are good to go :)
+After this, a new directory *mpc_solver* will appear and contain the solver.
+
+### 4. GPU acceleration
+The motion prediction part is accelerated by GPU. Make sure you have the correct driver and CUDA installed. This is checked in the *main.py* (by printing out *GPU available: True*). For Ubuntu, the driver can be installed via the *ubuntu-drivers*.
 
 ## Use Case
 Run *main.py* for the warehouse simulation (one robot, one or more pedestrians) in Python. The evaluation is in *main_eva.py*, which compares the situation with and without the motion prediction part.
 
+To run other cases or create your own cases, go to *main_base* and create scenarios based on the examples. Make sure to modify the **SCENARIO_NUM**:
+``` Python
+class MainBase:
+
+    HUMAN_SIZE = 0.2
+    HUMAN_VMAX = 1.5
+    HUMAN_STAGGER = 0.5
+
+    SCENARIO_NUM = XXX # modify this
+    HUMAN_STARTS, HUMAN_PATHS, ROBOT_START_POINT, ROBOT_PATH = scenario(SCENARIO_NUM)
+```
 
 
 
